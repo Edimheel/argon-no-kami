@@ -35,7 +35,6 @@
       "modifier": "Mod."
     },
     "errors": {
-      "actorNotOwned": "You do not have permission to roll for this actor.",
       "characteristicRollFailed": "Failed to trigger the characteristic roll."
     }
   }
