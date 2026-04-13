@@ -496,12 +496,16 @@ function getCollectionItems(actor, collection) {
 
 
 function getCurrentHudActor() {
-  const queuedTokenActor = lastQueuedArgonTokenId
-    ? canvas?.tokens?.get(lastQueuedArgonTokenId)?.actor
+  const controlledActor = canvas?.tokens?.controlled?.[0]?.actor ?? null;
+  const queuedToken = lastQueuedArgonTokenId
+    ? canvas?.tokens?.get(lastQueuedArgonTokenId)
     : null;
-  return queuedTokenActor
+  const queuedTokenActor = (queuedToken?.isOwner || game.user?.isGM)
+    ? queuedToken?.actor
+    : null;
+  return controlledActor
+    ?? queuedTokenActor
     ?? game.actors?.get(currentHudActorId)
-    ?? canvas?.tokens?.controlled?.[0]?.actor
     ?? game.user?.character
     ?? null;
 }

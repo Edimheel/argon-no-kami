@@ -35,7 +35,6 @@
       "modifier": "Mod."
     },
     "errors": {
-      "actorNotOwned": "Vous n'avez pas la permission de lancer ce jet.",
       "characteristicRollFailed": "Impossible de lancer le jet de caractéristique."
     }
   }
