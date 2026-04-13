@@ -48,6 +48,16 @@ const ICONS = {
   sheet: "icons/sundries/documents/document-sealed-red-tan.webp"
 };
 
+function ensureFoundryV13TokenCompatibility() {
+  const tokenClass = foundry?.canvas?.placeables?.Token;
+  if (!tokenClass) return;
+  Object.defineProperty(globalThis, "Token", {
+    configurable: true,
+    writable: true,
+    value: tokenClass
+  });
+}
+
 function ensureRuntimeStyle() {
   if (document.getElementById(`${MODULE_ID}-runtime-style`)) return;
   const style = document.createElement("style");
@@ -328,6 +338,33 @@ function buildRollData(actor, main, type, title, mental = false) {
   return data;
 }
 
+function buildCharacteristicRollDataFromEntry(actor, entry, title) {
+  const system = actorSystem(actor);
+  const diceUsed = num(system?.roll?.modDice, 20);
+  const raw = entry?.data ?? {};
+  const base = num(raw.modificateur ?? raw.total ?? raw.actuel ?? raw.score ?? entry?.score ?? 0, 0);
+  return {
+    title,
+    base,
+    content: {
+      listDice: { 12: `${game.i18n.localize("CNK.De-short")}12`, 20: `${game.i18n.localize("CNK.De-short")}20` },
+      dice: diceUsed,
+      nbreDe: 1,
+      bRoll: [
+        ...(raw?.bonusRoll ?? []),
+        ...(raw?.bonusRollCondition ?? [])
+      ].map((roll, id) => ({
+        id,
+        active: roll?.active ?? false,
+        name: roll?.name,
+        value: roll?.value
+      }))
+    },
+    canUseChance: true,
+    rollWButtons: ""
+  };
+}
+
 function buildAttackRollData(actor, item) {
   const domain = getWeaponAttackDomain(item);
   const system = actorSystem(actor);
@@ -469,8 +506,16 @@ function getCollectionItems(actor, collection) {
 
 
 function getCurrentHudActor() {
-  return game.actors?.get(currentHudActorId)
-    ?? canvas?.tokens?.controlled?.[0]?.actor
+  const controlledActor = canvas?.tokens?.controlled?.[0]?.actor ?? null;
+  const queuedToken = lastQueuedArgonTokenId
+    ? canvas?.tokens?.get(lastQueuedArgonTokenId)
+    : null;
+  const queuedTokenActor = (queuedToken?.isOwner || game.user?.isGM)
+    ? queuedToken?.actor
+    : null;
+  return controlledActor
+    ?? queuedTokenActor
+    ?? game.actors?.get(currentHudActorId)
     ?? game.user?.character
     ?? null;
 }
@@ -690,7 +735,7 @@ async function triggerCharacteristicRoll(actor, entry) {
   try {
     const data = buildRollData(actor, "caracteristiques", entry.key, title, false);
     if (data) {
-      sendRoll(actor, data);
+      await sendRoll(actor, data);
       return;
     }
   } catch (error) {
@@ -702,12 +747,20 @@ async function triggerCharacteristicRoll(actor, entry) {
     try {
       const data = buildRollData(actor, fallbackMain, entry.key, title, false);
       if (data) {
-        sendRoll(actor, data);
+        await sendRoll(actor, data);
         return;
       }
     } catch (error) {
       console.error(`[${MODULE_ID}] Characteristic roll fallback failed.`, error);
     }
+  }
+
+  try {
+    const data = buildCharacteristicRollDataFromEntry(actor, entry, title);
+    if (data) await sendRoll(actor, data);
+  } catch (error) {
+    console.error(`[${MODULE_ID}] Characteristic roll entry fallback failed.`, error);
+    ui.notifications?.error(t("errors.characteristicRollFailed"));
   }
 }
 
@@ -924,6 +977,7 @@ Hooks.once("ready", () => {
 
 Hooks.once("init", () => {
   if (game.system.id !== "cthulhu-no-kami") return;
+  ensureFoundryV13TokenCompatibility();
   Hooks.once("argonInit", (CoreHUD) => {
     const ARGON = CoreHUD.ARGON;
     const ActionPanel = ARGON.MAIN.ActionPanel;
