@@ -719,6 +719,10 @@ ${clickHint}`;
 
 async function triggerCharacteristicRoll(actor, entry) {
   if (!actor || !entry) return;
+  if (!actor.isOwner) {
+    ui.notifications?.warn(t("errors.actorNotOwned"));
+    return;
+  }
 
   const title = entry.label;
 
