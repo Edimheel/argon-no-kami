@@ -1,0 +1,48 @@
+{
+  "id": "enhancedcombathud-cthulhu-no-kami",
+  "title": "Argon - Combat HUD (CTHULHU-NO-KAMI)",
+  "description": "Intégration Argon pour le système Cthulhu No Kami.",
+  "version": "0.10.2",
+  "authors": [
+    {
+      "name": "OpenAI"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13.351"
+  },
+  "relationships": {
+    "requires": [
+      {
+        "id": "enhancedcombathud",
+        "type": "module"
+      }
+    ],
+    "systems": [
+      {
+        "id": "cthulhu-no-kami",
+        "type": "system"
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "styles": [
+    "styles/module.css"
+  ],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "license": "MIT"
+}

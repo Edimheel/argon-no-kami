@@ -1,0 +1,119 @@
+#enhancedcombathud .action-element,
+.argon .action-element {
+  min-height: 78px !important;
+}
+
+#enhancedcombathud .action-element .title,
+#enhancedcombathud .action-element .title *,
+#enhancedcombathud .action-element .label,
+#enhancedcombathud .action-element .label *,
+.argon .action-element .title,
+.argon .action-element .title *,
+.argon .action-element .label,
+.argon .action-element .label * {
+  font-size: 16px !important;
+  line-height: 1.12 !important;
+  font-weight: 700 !important;
+}
+
+#enhancedcombathud .action-element .subtitle,
+#enhancedcombathud .action-element .subtitle *,
+.argon .action-element .subtitle,
+.argon .action-element .subtitle * {
+  font-size: 12px !important;
+  line-height: 1.08 !important;
+}
+
+
+#enhancedcombathud .action-element, .argon .action-element { cursor: pointer !important; }
+
+
+.cnk-argon-popover__item {
+  display: grid !important;
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  padding: 9px !important;
+}
+
+.cnk-argon-popover__item-icon {
+  width: 36px !important;
+  height: 36px !important;
+  align-self: start !important;
+  margin-top: 1px !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.cnk-argon-popover__item-text {
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.cnk-argon-popover__item-title,
+.cnk-argon-popover__item-subtitle,
+.cnk-argon-popover__item-summary {
+  display: block !important;
+  position: static !important;
+  margin: 0 !important;
+  white-space: normal !important;
+}
+
+.cnk-argon-popover__item-title {
+  line-height: 1.25 !important;
+}
+
+.cnk-argon-popover__item-subtitle {
+  line-height: 1.2 !important;
+}
+
+.cnk-argon-popover__item-summary {
+  margin-top: 2px !important;
+  line-height: 1.28 !important;
+}
+
+
+.cnk-argon-popover {
+  pointer-events: auto !important;
+}
+
+.cnk-argon-popover__body {
+  gap: 8px !important;
+}
+
+.cnk-argon-popover__item {
+  min-height: 0 !important;
+  height: auto !important;
+  align-items: start !important;
+  pointer-events: auto !important;
+}
+
+.cnk-argon-popover__item-text {
+  gap: 4px !important;
+}
+
+.cnk-argon-popover__item-title,
+.cnk-argon-popover__item-subtitle,
+.cnk-argon-popover__item-summary {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.cnk-argon-popover__item-title {
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+
+.cnk-argon-popover__item-subtitle {
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+}
+
+.cnk-argon-popover__item-summary {
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}

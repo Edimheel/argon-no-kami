@@ -1,0 +1,38 @@
+{
+  "enhancedcombathud-cthulhu-no-kami": {
+    "panels": {
+      "combat": "Combat",
+      "actions": "Actions"
+    },
+    "buttons": {
+      "voies": "Voies",
+      "resistanceMentale": "Résistance mentale",
+      "sheet": "Feuille",
+      "avantages": "Avantages",
+      "caracteristiques": "Caractéristiques",
+      "initiative": "Initiative"
+    },
+    "tooltip": {
+      "damage": "Dégâts",
+      "attackMod": "Mod. d'attaque",
+      "damageMod": "Mod. de dégâts"
+    },
+    "portrait": {
+      "hp": "PV",
+      "ki": "Ki",
+      "maho": "Maho",
+      "serenite": "Sérénité",
+      "defense": "Déf",
+      "initiative": "Init"
+    },
+    "subtitle": {
+      "weapon": "Arme",
+      "spell": "Sortilège",
+      "item": "Élément"
+    },
+    "empty": "Aucun élément.",
+    "labels": {
+      "modifier": "Mod."
+    }
+  }
+}
