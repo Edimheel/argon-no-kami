@@ -48,6 +48,16 @@ const ICONS = {
   sheet: "icons/sundries/documents/document-sealed-red-tan.webp"
 };
 
+function ensureFoundryV13TokenCompatibility() {
+  const tokenClass = foundry?.canvas?.placeables?.Token;
+  if (!tokenClass) return;
+  Object.defineProperty(globalThis, "Token", {
+    configurable: true,
+    writable: true,
+    value: tokenClass
+  });
+}
+
 function ensureRuntimeStyle() {
   if (document.getElementById(`${MODULE_ID}-runtime-style`)) return;
   const style = document.createElement("style");
@@ -971,6 +981,7 @@ Hooks.once("ready", () => {
 
 Hooks.once("init", () => {
   if (game.system.id !== "cthulhu-no-kami") return;
+  ensureFoundryV13TokenCompatibility();
   Hooks.once("argonInit", (CoreHUD) => {
     const ARGON = CoreHUD.ARGON;
     const ActionPanel = ARGON.MAIN.ActionPanel;
