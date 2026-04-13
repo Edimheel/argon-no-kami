@@ -33,6 +33,9 @@
     "empty": "No entries.",
     "labels": {
       "modifier": "Mod."
+    },
+    "errors": {
+      "characteristicRollFailed": "Failed to trigger the characteristic roll."
     }
   }
 }

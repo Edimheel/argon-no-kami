@@ -33,6 +33,9 @@
     "empty": "Aucun élément.",
     "labels": {
       "modifier": "Mod."
+    },
+    "errors": {
+      "characteristicRollFailed": "Impossible de lancer le jet de caractéristique."
     }
   }
 }
